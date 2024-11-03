@@ -1,0 +1,9 @@
+/CotrainingNonStationary/NormalAndBatch/YearExperimentResults/
+/CotrainingNonStationary/Online/YearExperimentResults/
+/DataProcessing/YearData/
+/data/syscalls/X_test.pkl
+/data/permissions/X_train.pkl
+/data/syscalls/X_train.pkl
+/DataProcessing/YearData/FullData/fulldata_year.pkl
+/DataProcessing/YearData/SysCalls/syscalls_year.pkl
+/DataProcessing/YearData/Permissions/permissions_year.pkl
