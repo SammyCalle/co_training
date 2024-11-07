@@ -7,3 +7,5 @@
 /DataProcessing/YearData/FullData/fulldata_year.pkl
 /DataProcessing/YearData/SysCalls/syscalls_year.pkl
 /DataProcessing/YearData/Permissions/permissions_year.pkl
+/data/permissions/
+/data/syscalls/

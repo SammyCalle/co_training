@@ -1,8 +1,7 @@
-import numpy as np
 import pandas as pd
 import random
-from SplitPreProcess import SplitViews
-from river import forest, stream, metrics
+from CotrainingNonStationary.SplitPreProcess import SplitViews
+from river import stream, metrics
 import pickle
 
 with open("../YearExperimentResults/models_X1.pkl", 'rb') as f:
@@ -91,5 +90,14 @@ accuracy_list, recall_list, precision_list, f1_score_list = generate_metrics(pre
 metrics_df = pd.DataFrame(
     {'Accuracy': accuracy_list, 'Recall': recall_list, 'Precision': precision_list, 'F1': f1_score_list})
 
-with open("../YearExperimentResults/metrics.pkl", "wb") as file:
-    pickle.dump(metrics_df, file)
+latex_table = metrics_df.to_latex(
+    index=True,
+    caption="Model Performance Metrics",
+    label="tab:model_performance",
+    escape=False,
+    column_format="|c|c|c|c|c|"
+)
+print(latex_table)
+
+# with open("../YearExperimentResults/metrics.pkl", "wb") as file:
+#     pickle.dump(metrics_df, file)
