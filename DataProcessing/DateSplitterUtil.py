@@ -51,7 +51,7 @@ def date_constraining(initial_date, final_date, real_legitimate, real_malware, m
 
     data = data.sample(frac=1)
     if not splitter:
-        return data
+        return data.drop(columns='HighestModDate')
     else:
         treeMonth = data.groupby(pd.Grouper(key='HighestModDate', freq=splitter))
         dfstreeMonth = [group.drop(columns='HighestModDate').reset_index(drop=True) for _, group in treeMonth]

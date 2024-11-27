@@ -1,5 +1,5 @@
-/CotrainingNonStationary/NormalAndBatch/YearExperimentResults/
-/CotrainingNonStationary/Online/YearExperimentResults/
+/RFCotrainingNonStationary/NormalAndBatch/YearExperimentResults/
+/RFCotrainingNonStationary/Online/YearExperimentResults/
 /DataProcessing/YearData/
 /data/syscalls/X_test.pkl
 /data/permissions/X_train.pkl

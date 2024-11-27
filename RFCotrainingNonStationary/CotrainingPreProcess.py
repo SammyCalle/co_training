@@ -1,8 +1,18 @@
+from imblearn.over_sampling import SMOTE
 import pandas as pd
-import numpy as np
 
+def cotraining_preparation(data_list, resample):
 
-def cotraining_preparation(data_list):
+    if resample:
+        for i, data in enumerate(data_list):
+            y = data['Malware']
+            X = data.drop('Malware', axis=1)
+
+            smote = SMOTE(random_state=42)
+            X_resampled, y_resampled = smote.fit_resample(X, y)
+
+            data_resampled = pd.concat([X_resampled, y_resampled], axis=1)
+            data_list[i] = data_resampled
 
     system_calls = []
     permissions = []

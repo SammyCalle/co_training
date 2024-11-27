@@ -6,7 +6,6 @@
 import pickle
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.ensemble import AdaBoostClassifier
 from sklearn.metrics import classification_report
 from CoTrainingClassifier import CoTrainingClassifier
 
