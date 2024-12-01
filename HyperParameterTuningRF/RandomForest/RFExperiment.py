@@ -33,7 +33,7 @@ param_grid = {
     'max_depth': [None,3, 6, 9],
     'max_leaf_nodes': [None,3, 6, 9, 12, 15],
 }
-
+# Explain why max_features is none , what id does.
 
 grid_search = GridSearchCV(RandomForestClassifier(),
                            param_grid=param_grid)
