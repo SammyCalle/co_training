@@ -1,5 +1,6 @@
 import random
 import copy
+import numpy as np
 
 
 
@@ -103,14 +104,14 @@ class Non_Stationary_CoTrainingClassifier(object):
         # The initial fit for the labeled data
 
         if self.first_:
-            self.clf1_.fit(x=X1.iloc[L], y=y[L], epochs=100)
-            self.clf2_.fit(x=X2.iloc[L], y=y[L], epochs=100)
+            self.clf1_.fit(x=X1.iloc[L], y=y[L], epochs=10)
+            self.clf2_.fit(x=X2.iloc[L], y=y[L], epochs=10)
             self.first_ = False
         else:
             self.clf1_.load_weights('clf1.weights.h5')
             self.clf2_.load_weights('clf2.weights.h5')
-            self.clf1_.fit(x=X1.iloc[L], y=y[L], epochs=100)
-            self.clf2_.fit(x=X2.iloc[L], y=y[L], epochs=100)
+            self.clf1_.fit(x=X1.iloc[L], y=y[L], epochs=10)
+            self.clf2_.fit(x=X2.iloc[L], y=y[L], epochs=10)
 
         self.clf1_.save_weights('clf1.weights.h5')
         self.clf2_.save_weights('clf2.weights.h5')
@@ -122,24 +123,22 @@ class Non_Stationary_CoTrainingClassifier(object):
             y1_prob = self.clf1_.predict(X1.iloc[U_])
             y2_prob = self.clf2_.predict(X2.iloc[U_])
 
-            y1_prob
-            y2_prob
+            y1_prob_flattened = y1_prob.reshape(-1)
+            y2_prob_flattened = y2_prob.reshape(-1)
 
             n, p = [], []
 
-            for i in (y1_prob[:, 0].argsort())[-self.n_:]:
-                if y1_prob[i, 0] > 0.5:  # 0.5 would be a threshold so no lower than 0.5 will be accepted
-                    n.append(i)
-            for i in (y1_prob[:, 1].argsort())[-self.p_:]:
-                if y1_prob[i, 1] > 0.5:
-                    p.append(i)
+            y1_sorted_indices = np.argsort(y1_prob_flattened)[::-1]  # Descending order
+            y1_top_n_indices = y1_sorted_indices[:self.p_]
+            p.extend(y1_top_n_indices)
+            y1_bottom_n_indices = y1_sorted_indices[-self.n_:]
+            n.extend(y1_bottom_n_indices)
 
-            for i in (y2_prob[:, 0].argsort())[-self.n_:]:
-                if y2_prob[i, 0] > 0.5:
-                    n.append(i)
-            for i in (y2_prob[:, 1].argsort())[-self.p_:]:
-                if y2_prob[i, 1] > 0.5:
-                    p.append(i)
+            y2_sorted_indices = np.argsort(y2_prob_flattened)[::-1]  # Descending order
+            y2_top_n_indices = y2_sorted_indices[:self.p_]
+            p.extend(y2_top_n_indices)
+            y2_bottom_n_indices = y2_sorted_indices[-self.n_:]
+            n.extend(y2_bottom_n_indices)
 
             # Label the samples and remove the newly added samples from U_
             y[[U_[x] for x in p]] = 1

@@ -1,24 +1,19 @@
 
-from sklearn.metrics import classification_report
-from sklearn.model_selection import train_test_split
-import pandas as pd
 import pickle
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV,RandomizedSearchCV
 
-with open("../data.pkl", 'rb') as f:
-    data = pickle.load(f)
+with open("../data/permissions/X_train_permissions.pkl", 'rb') as file:
+    X_train_permissions = pickle.load(file)
 
+with open("../data/permissions/X_test_permissions.pkl", 'rb') as file:
+    X_test_permissions = pickle.load(file)
 
-X = data.drop("Malware", axis=1)
-X_system_calls = X.iloc[:, 2:289]
-X_permissions = X.iloc[:, 289:]
-y = data['Malware']
+with open("../data/permissions/y_train_permissions.pkl", 'rb') as file:
+    y_train_permissions = pickle.load(file)
 
-X_train, X_test,\
-    y_train, y_test = train_test_split(X_permissions, y,
-                                       test_size=0.25,
-                                       random_state=42)
+with open("../data/permissions/y_test_permissions.pkl", 'rb') as file:
+    y_test_permissions = pickle.load(file)
 
 # param_grid = {
 #     'n_estimators': [500,600,700],
@@ -28,7 +23,7 @@ X_train, X_test,\
 # }
 
 param_grid = {
-    'n_estimators': [25, 50, 100, 150, 200, 250, 300],
+    'n_estimators': [25, 50, 100, 150, 200, 250, 300, 600],
     'max_features': ['sqrt', 'log2', None],
     'max_depth': [None,3, 6, 9],
     'max_leaf_nodes': [None,3, 6, 9, 12, 15],
@@ -37,5 +32,5 @@ param_grid = {
 
 grid_search = GridSearchCV(RandomForestClassifier(),
                            param_grid=param_grid)
-grid_search.fit(X_train, y_train)
+grid_search.fit(X_train_permissions, y_train_permissions)
 print(grid_search.best_estimator_)

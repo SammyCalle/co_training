@@ -27,5 +27,5 @@ dfsNOSplit = date_constraining(initial_date="2012-01-01", final_date="2018-12-31
 #     scaler = StandardScaler()
 #     eachdataset = scaler.fit_transform(eachdataset)
 
-with open("../HyperParameterTuningRF/data.pkl", "wb") as f:
+with open("../HyperParameterTuningRF/data/data.pkl", "wb") as f:
     pickle.dump(dfsNOSplit, f)
