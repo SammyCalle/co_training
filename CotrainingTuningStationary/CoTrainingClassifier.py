@@ -99,11 +99,11 @@ class CoTrainingClassifier(object):
         while it != self.k_ and U:
             it += 1
 
-            self.clf1_.fit(X1[L], y[L])
-            self.clf2_.fit(X2[L], y[L])
+            self.clf1_.fit(X1.iloc[L], y[L])
+            self.clf2_.fit(X2.iloc[L], y[L])
 
-            y1_prob = self.clf1_.predict_proba(X1[U_])
-            y2_prob = self.clf2_.predict_proba(X2[U_])
+            y1_prob = self.clf1_.predict_proba(X1.iloc[U_])
+            y2_prob = self.clf2_.predict_proba(X2.iloc[U_])
 
 
 
@@ -142,8 +142,8 @@ class CoTrainingClassifier(object):
         #TODO: Handle the case where the classifiers fail to agree on any of the samples (i.e. both n and p are empty)
 
         #let's fit our final model
-        self.clf1_.fit(X1[L], y[L])
-        self.clf2_.fit(X2[L], y[L])
+        self.clf1_.fit(X1.iloc[L], y[L])
+        self.clf2_.fit(X2.iloc[L], y[L])
 
     #TODO: Move this outside of the class into a util file.
     def supports_proba(self, clf, x):
@@ -183,7 +183,7 @@ class CoTrainingClassifier(object):
             if y1_i == y2_i:
                 y_pred[i] = y1_i
             elif proba_supported:
-                y1_probs = self.clf1_.predict_proba([X1[i]])[0]
+                y1_probs = self.clf1_.predict_proba([X1.iloc[i]])[0]
                 y2_probs = self.clf2_.predict_proba([X2[i]])[0]
                 sum_y_probs = [prob1 + prob2 for (prob1, prob2) in zip(y1_probs, y2_probs)]
                 max_sum_prob = max(sum_y_probs)

@@ -13,7 +13,7 @@ if __name__ == '__main__':
     type(data_list)
     system_calls, permissions, y = cotraining_preparation(data_list, resample=False)
 
-    print('RandomForest Non RFCotrainingStationary')
+    print('RandomForest Non CotrainingTuningStationary')
 
     model_system_calls = forest.ARFClassifier(max_features=287,n_models=200)
 

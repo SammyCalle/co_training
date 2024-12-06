@@ -19,7 +19,7 @@ if __name__ == '__main__':
 
     system_calls, permissions, y = cotraining_preparation(batch_data_list, resample=False)
 
-    print('RandomForest Non RFCotrainingStationary')
+    print('RandomForest Non CotrainingTuningStationary')
 
     model_system_calls = RandomForestClassifier(max_features=None, n_estimators=200)
     model_permissions = RandomForestClassifier(max_features='log2', n_estimators=50)

@@ -11,14 +11,17 @@ if __name__ == '__main__':
         data_list = pickle.load(f)
 
     type(data_list)
-    system_calls, permissions, y = cotraining_preparation(data_list, resample= False)
+    system_calls, permissions, y = cotraining_preparation(data_list, resample=True)
 
-    print('RandomForest Non RFCotrainingStationary')
+    print('RandomForest Non CotrainingTuningStationary')
 
     clf_mlp_system_calls = keras.Sequential(
         [
             Dense(52, activation='relu', input_dim=287),
+            Dense(32, activation='relu'),
             Dense(64, activation='relu'),
+            Dense(128, activation='relu'),
+            Dense(256, activation='relu'),
             Dense(128, activation='relu'),
             Dense(64, activation='relu'),
             Dense(16, activation='relu'),
@@ -32,10 +35,6 @@ if __name__ == '__main__':
     clf_mlp_permissions = keras.Sequential(
         [
             Dense(52, activation='relu', input_dim=166),
-            Dense(64, activation='relu'),
-            Dense(128, activation='relu'),
-            Dense(64, activation='relu'),
-            Dense(16, activation='relu'),
             Dense(8, activation='relu'),
             Dense(1, activation='sigmoid')
         ]
@@ -51,8 +50,8 @@ if __name__ == '__main__':
     dict_models_X1 = rf_co_ns_clf.model_X1_dict
     dict_models_X2 = rf_co_ns_clf.model_X2_dict
 
-    with open("YearExperimentResults/non_normal/models_X1.pkl", "wb") as file:
+    with open("YearExperimentResults/non_normal/optimized/OnlyModel/balanced/models_X1.pkl", "wb") as file:
         pickle.dump(dict_models_X1, file)
 
-    with open("YearExperimentResults/non_normal/models_X2.pkl", "wb") as file:
+    with open("YearExperimentResults/non_normal/optimized/OnlyModel/balanced/models_X2.pkl", "wb") as file:
         pickle.dump(dict_models_X2, file)

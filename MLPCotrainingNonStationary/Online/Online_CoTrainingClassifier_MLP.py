@@ -104,13 +104,13 @@ class Non_Stationary_CoTrainingClassifier(object):
         # The initial fit for the labeled data
 
         if self.first_:
-            self.clf1_.fit(x=X1.iloc[L], y=y[L], epochs=10)
+            self.clf1_.fit(x=X1.iloc[L], y=y[L], epochs=20)
             self.clf2_.fit(x=X2.iloc[L], y=y[L], epochs=10)
             self.first_ = False
         else:
             self.clf1_.load_weights('clf1.weights.h5')
             self.clf2_.load_weights('clf2.weights.h5')
-            self.clf1_.fit(x=X1.iloc[L], y=y[L], epochs=10)
+            self.clf1_.fit(x=X1.iloc[L], y=y[L], epochs=20)
             self.clf2_.fit(x=X2.iloc[L], y=y[L], epochs=10)
 
         self.clf1_.save_weights('clf1.weights.h5')
@@ -162,8 +162,8 @@ class Non_Stationary_CoTrainingClassifier(object):
             #Fit the new labeled data
             self.clf1_.load_weights('clf1.weights.h5')
             self.clf2_.load_weights('clf2.weights.h5')
-            self.clf1_.fit(x=X1.iloc[L], y=y[L], epochs=100)
-            self.clf2_.fit(x=X2.iloc[L], y=y[L], epochs=100)
+            self.clf1_.fit(x=X1.iloc[L], y=y[L], epochs=20)
+            self.clf2_.fit(x=X2.iloc[L], y=y[L], epochs=10)
             self.clf1_.save_weights('clf1.weights.h5')
             self.clf2_.save_weights('clf2.weights.h5')
 
