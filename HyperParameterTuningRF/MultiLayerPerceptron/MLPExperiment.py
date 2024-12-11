@@ -7,16 +7,16 @@ from imblearn.over_sampling import SMOTE
 import keras
 from keras.src.layers import Dense
 
-with open("../data/system_calls/X_train_system_calls.pkl", 'rb') as file:
+with open("../data/both/X_train.pkl", 'rb') as file:
     X_train = pickle.load(file)
 
-with open("../data/system_calls/X_test_system_calls.pkl", 'rb') as file:
+with open("../data/both/X_test.pkl", 'rb') as file:
     X_test = pickle.load(file)
 
-with open("../data/system_calls/y_train_system_calls.pkl", 'rb') as file:
+with open("../data/both/y_train.pkl", 'rb') as file:
     y_train = pickle.load(file)
 
-with open("../data/system_calls/y_test_system_calls.pkl", 'rb') as file:
+with open("../data/both/y_test.pkl", 'rb') as file:
     y_test = pickle.load(file)
 
 smote = SMOTE(random_state=42)
@@ -24,7 +24,10 @@ X_train_resampled, y_train_resampled = smote.fit_resample(X_train, y_train)
 
 model = keras.Sequential(
     [
-        Dense(52, activation='relu', input_dim=287),
+        Dense(52, activation='relu', input_dim=453),
+        Dense(32, activation='relu'),
+        Dense(64, activation='relu'),
+        Dense(16, activation='relu'),
         Dense(8, activation='relu'),
         Dense(1, activation='sigmoid')
     ]
@@ -32,7 +35,7 @@ model = keras.Sequential(
 
 model.compile(loss='binary_crossentropy', optimizer='adam')
 
-model.fit(X_train_resampled, y_train_resampled, epochs=10)
+model.fit(X_train_resampled, y_train_resampled, epochs=30)
 y_pred_rand = model.predict(X_test)
 
 y_pred = np.where(y_pred_rand >= 0.5, 1, 0)

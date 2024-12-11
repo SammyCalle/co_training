@@ -19,7 +19,7 @@ if __name__ == '__main__':
         else:
             batch_data_list.append(data_list[i])
 
-    system_calls, permissions, y = cotraining_preparation(batch_data_list, resample=False)
+    system_calls, permissions, y = cotraining_preparation(batch_data_list, resample=True)
 
     print('RandomForest Non CotrainingTuningStationary')
 
@@ -58,8 +58,8 @@ if __name__ == '__main__':
     dict_models_X1 = rf_co_ns_clf.model_X1_dict
     dict_models_X2 = rf_co_ns_clf.model_X2_dict
 
-    with open("YearExperimentResults/Batch/non_normal/optimized/OnlyModel/not_balanced/models_X1.pkl", "wb") as file:
+    with open("YearExperimentResults/Batch/non_normal/optimized/OnlyModel/balanced/models_X1.pkl", "wb") as file:
         pickle.dump(dict_models_X1, file)
 
-    with open("YearExperimentResults/Batch/non_normal/optimized/OnlyModel/not_balanced/models_X2.pkl", "wb") as file:
+    with open("YearExperimentResults/Batch/non_normal/optimized/OnlyModel/balanced/models_X2.pkl", "wb") as file:
         pickle.dump(dict_models_X2, file)

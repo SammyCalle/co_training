@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 with open("data/data.pkl", 'rb') as f:
     data = pickle.load(f)
 
-X = data.drop("Malware", axis=1)
+X = data.drop(["execve","Malware"], axis=1)
 X_system_calls = X.iloc[:, 2:289]
 X_permissions = X.iloc[:, 289:]
 y = data['Malware']

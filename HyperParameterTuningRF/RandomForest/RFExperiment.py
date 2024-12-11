@@ -28,7 +28,7 @@ param_grid = {
     'max_depth': [None,3, 6, 9],
     'max_leaf_nodes': [None,3, 6, 9, 12, 15],
 }
-
+# RandomForestClassifier(n_estimators=150)
 grid_search = GridSearchCV(RandomForestClassifier(),
                            param_grid=param_grid)
 grid_search.fit(X_train, y_train)
