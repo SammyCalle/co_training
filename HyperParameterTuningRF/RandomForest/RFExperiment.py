@@ -3,17 +3,17 @@ import pickle
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV,RandomizedSearchCV
 
-with open("../data/permissions/X_train_permissions.pkl", 'rb') as file:
-    X_train_permissions = pickle.load(file)
+with open("../data/both/X_train.pkl", 'rb') as file:
+    X_train = pickle.load(file)
 
-with open("../data/permissions/X_test_permissions.pkl", 'rb') as file:
-    X_test_permissions = pickle.load(file)
+with open("../data/both/X_test.pkl", 'rb') as file:
+    X_test = pickle.load(file)
 
-with open("../data/permissions/y_train_permissions.pkl", 'rb') as file:
-    y_train_permissions = pickle.load(file)
+with open("../data/both/y_train.pkl", 'rb') as file:
+    y_train = pickle.load(file)
 
-with open("../data/permissions/y_test_permissions.pkl", 'rb') as file:
-    y_test_permissions = pickle.load(file)
+with open("../data/both/y_test.pkl", 'rb') as file:
+    y_test = pickle.load(file)
 
 # param_grid = {
 #     'n_estimators': [500,600,700],
@@ -31,5 +31,5 @@ param_grid = {
 
 grid_search = GridSearchCV(RandomForestClassifier(),
                            param_grid=param_grid)
-grid_search.fit(X_train_permissions, y_train_permissions)
+grid_search.fit(X_train, y_train)
 print(grid_search.best_estimator_)

@@ -1,5 +1,6 @@
 import pandas as pd
 import random
+import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from RFCotrainingNonStationary.SplitPreProcess import SplitViews
 from sklearn.metrics import accuracy_score,f1_score,recall_score, precision_score
@@ -30,33 +31,29 @@ def generate_all_the_predictions_lists(data_list, models_X1, models_X2) -> []:
     return prediction_list, y
 
 
-def generate_prediction_list(model_x1, model_x2, x1_test, x2_test) -> []:
+def generate_prediction_list(model_x1, model_x2, x1_test, x2_test):
     prediction = []
 
     prediction_x1 = model_x1.predict(x1_test)
     prediction_x2 = model_x2.predict(x2_test)
 
-    for i, (y1,y2) in enumerate(zip(prediction_x1,prediction_x2)):
-        if y1 == y2:
-            prediction.append(int(y1))
-        else:
-            y1_probs = model_x1.predict_proba([x1_test.iloc[i]])[0]
-            y2_probs = model_x2.predict_proba([x2_test.iloc[i]])[0]
-            sum_y_probs = [prob1 + prob2 for (prob1, prob2) in zip(y1_probs, y2_probs)]
-            max_sum_prob = max(sum_y_probs)
-            prediction.append(int(sum_y_probs.index(max_sum_prob)))
+    prediction_x1_class = np.where(prediction_x1 >= 0.5, 1, 0)
+    prediction_x2_class = np.where(prediction_x2 >= 0.5, 1, 0)
 
-    # for x1, x2 in zip(prediction_x1, prediction_x2):
-    #     prediction.append(decide_prediction(prediction_x1=x1, prediction_x2=x2))
+    for x1, x2 in zip(prediction_x1_class, prediction_x2_class):
+        prediction_value = decide_prediction(prediction_x1=x1, prediction_x2=x2)
+        prediction.append(prediction_value)
 
-    return prediction
+    return np.array(prediction)
 
 
-def decide_prediction(prediction_x1, prediction_x2) -> int:
+def decide_prediction(prediction_x1, prediction_x2):
     if prediction_x1 == prediction_x2:
-        return prediction_x1
+        return prediction_x1[0]
     else:
-        return random.randint(0, 1)
+        sumPrediction = prediction_x1[0] + prediction_x2[0]
+        pred_val = np.where(sumPrediction >= 1, 1, 0)
+        return pred_val
 
 
 prediction_list, y = generate_all_the_predictions_lists(

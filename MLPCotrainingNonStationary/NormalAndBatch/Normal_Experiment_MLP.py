@@ -3,7 +3,7 @@ import pickle
 import keras
 from keras.src.layers import Dense
 from RFCotrainingNonStationary.CotrainingPreProcess import cotraining_preparation
-from Online_CoTrainingClassifier_MLP import Non_Stationary_CoTrainingClassifier
+from CoTrainingClassifier_MLP import Non_Stationary_CoTrainingClassifier
 
 if __name__ == '__main__':
 
@@ -50,8 +50,8 @@ if __name__ == '__main__':
     dict_models_X1 = rf_co_ns_clf.model_X1_dict
     dict_models_X2 = rf_co_ns_clf.model_X2_dict
 
-    with open("YearExperimentResults/non_normal/optimized/OnlyModel/not_balanced/models_X1.pkl", "wb") as file:
+    with open("YearExperimentResults/Normal/non_normal/optimized/OnlyModel/not_balanced/models_X1.pkl", "wb") as file:
         pickle.dump(dict_models_X1, file)
 
-    with open("YearExperimentResults/non_normal/optimized/OnlyModel/not_balanced/models_X2.pkl", "wb") as file:
+    with open("YearExperimentResults/Normal/non_normal/optimized/OnlyModel/not_balanced/models_X2.pkl", "wb") as file:
         pickle.dump(dict_models_X2, file)

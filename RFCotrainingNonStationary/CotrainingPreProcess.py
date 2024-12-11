@@ -28,8 +28,8 @@ def cotraining_preparation(data_list, resample):
         data.loc[num_to_change:, 'Malware'] = -1
 
     for data in data_list:
-        system_calls.append(data.iloc[:, 2:289])
-        permissions.append(data.iloc[:, 289:])
         y.append(data.pop('Malware'))
+        system_calls.append(data.iloc[:, 1:288])
+        permissions.append(data.iloc[:, 288:])
 
     return system_calls, permissions, y

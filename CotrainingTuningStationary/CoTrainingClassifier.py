@@ -174,7 +174,7 @@ class CoTrainingClassifier(object):
         y1 = self.clf1_.predict(X1)
         y2 = self.clf2_.predict(X2)
 
-        proba_supported = self.supports_proba(self.clf1_, X1[0]) and self.supports_proba(self.clf2_, X2[0])
+        proba_supported = self.supports_proba(self.clf1_, X1.iloc[0]) and self.supports_proba(self.clf2_, X2.iloc[0])
 
         #fill y_pred with -1 so we can identify the samples in which the classifiers failed to agree
         y_pred = np.asarray([-1] * X1.shape[0])
@@ -184,7 +184,7 @@ class CoTrainingClassifier(object):
                 y_pred[i] = y1_i
             elif proba_supported:
                 y1_probs = self.clf1_.predict_proba([X1.iloc[i]])[0]
-                y2_probs = self.clf2_.predict_proba([X2[i]])[0]
+                y2_probs = self.clf2_.predict_proba([X2.iloc[i]])[0]
                 sum_y_probs = [prob1 + prob2 for (prob1, prob2) in zip(y1_probs, y2_probs)]
                 max_sum_prob = max(sum_y_probs)
                 y_pred[i] = sum_y_probs.index(max_sum_prob)
