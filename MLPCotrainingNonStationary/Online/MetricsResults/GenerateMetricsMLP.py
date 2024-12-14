@@ -19,7 +19,7 @@ with open("../../../DataProcessing/YearData/FullData/fulldata_year.pkl", 'rb') a
 def generate_all_the_predictions_lists(data_list, models_X1, models_X2) -> []:
     prediction_list = []
 
-    system_calls, permissions, y = SplitViews(data_list)
+    both, system_calls, permissions, y = SplitViews(data_list)
 
     for key in models_X1:
         generated_list = generate_prediction_list(model_x1=models_X1[key], model_x2=models_X2[key],

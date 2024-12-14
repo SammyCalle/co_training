@@ -5,10 +5,10 @@ from RFCotrainingNonStationary.SplitPreProcess import SplitViews
 from sklearn.metrics import accuracy_score,f1_score,recall_score, precision_score
 import pickle
 
-with open("../YearExperimentResults/Normal/non_normal/optimized/OnlyModel/balanced/models_X1.pkl", 'rb') as f:
+with open("../YearExperimentResults/Normal/models_X1.pkl", 'rb') as f:
     models_X1 = pickle.load(f)
 
-with open("../YearExperimentResults/Normal/non_normal/optimized/OnlyModel/balanced/models_X2.pkl", 'rb') as f:
+with open("../YearExperimentResults/Normal/models_X2.pkl", 'rb') as f:
     models_X2 = pickle.load(f)
 
 with open("../../../DataProcessing/YearData/FullData/fulldata_year.pkl", 'rb') as f:
@@ -18,7 +18,7 @@ with open("../../../DataProcessing/YearData/FullData/fulldata_year.pkl", 'rb') a
 def generate_all_the_predictions_lists(data_list, models_X1, models_X2) -> []:
     prediction_list = []
 
-    system_calls, permissions, y = SplitViews(data_list)
+    both, system_calls, permissions, y = SplitViews(data_list)
 
     for key in models_X1:
         generated_list = generate_prediction_list(model_x1=models_X1[key], model_x2=models_X2[key],
@@ -100,5 +100,5 @@ latex_table = metrics_df.to_latex(
 )
 print(latex_table)
 
-with open("../YearExperimentResults/Normal/non_normal/optimized/OnlyModel/balanced/metrics.pkl", "wb") as file:
+with open("../YearExperimentResults/Normal/metrics.pkl", "wb") as file:
     pickle.dump(metrics_df, file)

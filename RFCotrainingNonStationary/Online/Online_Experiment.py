@@ -15,9 +15,9 @@ if __name__ == '__main__':
 
     print('RandomForest Non CotrainingTuningStationary')
 
-    model_system_calls = forest.ARFClassifier(max_features=287,n_models=200)
+    model_system_calls = forest.ARFClassifier()
 
-    model_permissions = forest.ARFClassifier(max_features=int(np.log2(166)),n_models=50)
+    model_permissions = forest.ARFClassifier()
 
     # model = forest.ARFClassifier()
 
@@ -29,10 +29,10 @@ if __name__ == '__main__':
     dict_models_X1 = rf_co_ns_clf.model_X1_dict
     dict_models_X2 = rf_co_ns_clf.model_X2_dict
 
-    with open("YearExperimentResults/non_normal/optimized/OnlyModel/not_balanced/models_X1.pkl", "wb") as file:
+    with open("YearExperimentResults/models_X1.pkl", "wb") as file:
         pickle.dump(dict_models_X1, file)
 
-    with open("YearExperimentResults/non_normal/optimized/OnlyModel/not_balanced/models_X2.pkl", "wb") as file:
+    with open("YearExperimentResults/models_X2.pkl", "wb") as file:
         pickle.dump(dict_models_X2, file)
 
 

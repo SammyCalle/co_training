@@ -21,8 +21,10 @@ if __name__ == '__main__':
 
     print('RandomForest Non CotrainingTuningStationary')
 
-    model_system_calls = RandomForestClassifier(max_features=None, n_estimators=200)
-    model_permissions = RandomForestClassifier(max_features='log2', n_estimators=50)
+    model_system_calls = RandomForestClassifier()
+    model_permissions = RandomForestClassifier()
+    # model_system_calls = RandomForestClassifier(max_features=None, n_estimators=200)
+    # model_permissions = RandomForestClassifier(max_features='log2', n_estimators=50)
     batch_cotraining = CoTrainingClassifier(clf=model_system_calls, clf2=model_permissions)
 
     for i in range(len(system_calls) - 1):
@@ -31,8 +33,8 @@ if __name__ == '__main__':
     dict_models_X1 = batch_cotraining.model_X1_dict
     dict_models_X2 = batch_cotraining.model_X2_dict
 
-    with open("YearExperimentResults/Batch/non_normal/optimized/OnlyModel/not_balanced/models_X1.pkl", "wb") as file:
+    with open("YearExperimentResults/Batch/models_X1.pkl", "wb") as file:
         pickle.dump(dict_models_X1, file)
 
-    with open("YearExperimentResults/Batch/non_normal/optimized/OnlyModel/not_balanced/models_X2.pkl", "wb") as file:
+    with open("YearExperimentResults/Batch/models_X2.pkl", "wb") as file:
         pickle.dump(dict_models_X2, file)

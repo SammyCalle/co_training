@@ -11,7 +11,7 @@ if __name__ == '__main__':
         data_list = pickle.load(f)
 
     type(data_list)
-    system_calls, permissions, y = cotraining_preparation(data_list, resample=True)
+    system_calls, permissions, y = cotraining_preparation(data_list, resample=False)
 
     print('RandomForest Non CotrainingTuningStationary')
 
@@ -50,8 +50,8 @@ if __name__ == '__main__':
     dict_models_X1 = rf_co_ns_clf.model_X1_dict
     dict_models_X2 = rf_co_ns_clf.model_X2_dict
 
-    with open("YearExperimentResults/non_normal/optimized/OnlyModel/balanced/models_X1.pkl", "wb") as file:
+    with open("YearExperimentResults/non_normal/optimized/OnlyModel/not_balanced/models_X1.pkl", "wb") as file:
         pickle.dump(dict_models_X1, file)
 
-    with open("YearExperimentResults/non_normal/optimized/OnlyModel/balanced/models_X2.pkl", "wb") as file:
+    with open("YearExperimentResults/non_normal/optimized/OnlyModel/not_balanced/models_X2.pkl", "wb") as file:
         pickle.dump(dict_models_X2, file)
