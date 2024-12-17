@@ -38,17 +38,17 @@ def split_data(data_list, resample, percentage_data):
     return system_calls_and_permissions, system_calls, permissions, y
 
 
-system_calls_and_permissions, system_calls, permissions, labels = split_data(data_list=data_list, resample=True,
-                                                                             percentage_data=0.5)
+system_calls_and_permissions, system_calls, permissions, labels = split_data(data_list=data_list, resample=False,
+                                                                             percentage_data=0.25)
 
-with open("data50/both/balanced/both.pkl", "wb") as file:
+with open("data25/both/not_balanced/both.pkl", "wb") as file:
     pickle.dump(system_calls_and_permissions, file)
 
-with open("data50/systemcalls/balanced/system_calls.pkl", "wb") as file:
+with open("data25/systemcalls/not_balanced/system_calls.pkl", "wb") as file:
     pickle.dump(system_calls, file)
 
-with open("data50/permissions/balanced/permissions.pkl", "wb") as file:
+with open("data25/permissions/not_balanced/permissions.pkl", "wb") as file:
     pickle.dump(permissions, file)
 
-with open("data50/labels/balanced/labels.pkl", "wb") as file:
+with open("data25/labels/not_balanced/labels.pkl", "wb") as file:
     pickle.dump(labels, file)

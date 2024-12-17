@@ -4,7 +4,7 @@ from RFCotrainingNonStationary.SplitPreProcess import SplitViews
 from river import stream, metrics, forest
 import pickle
 
-with open("../not_balanced/both/model75.pkl", 'rb') as f:
+with open("../balanced/both/model25.pkl", 'rb') as f:
     models = pickle.load(f)
 
 with open("../../../../DataProcessing/YearData/FullData/fulldata_year.pkl", 'rb') as f:
@@ -78,5 +78,5 @@ latex_table = metrics_df.to_latex(
 )
 print(latex_table)
 
-with open("../not_balanced/both/metrics75.pkl", "wb") as file:
+with open("../balanced/both/metrics25.pkl", "wb") as file:
     pickle.dump(metrics_df, file)
