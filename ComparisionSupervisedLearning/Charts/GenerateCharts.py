@@ -3,6 +3,15 @@ import pickle
 import numpy as np
 import pandas as pd
 
+with open("../RamdonForest/NormalAndBatch/Normal/balanced/permissions/metrics25.pkl", 'rb') as f:
+    normal_balanced_permissions_25 = pickle.load(f)
+
+with open("../RamdonForest/NormalAndBatch/Normal/balanced/systemcalls/metrics25.pkl", 'rb') as f:
+    normal_balanced_system_calls_25 = pickle.load(f)
+
+with open("../RamdonForest/NormalAndBatch/Normal/balanced/both/metrics25.pkl", 'rb') as f:
+    normal_balanced_both_25 = pickle.load(f)
+
 with open("../RamdonForest/NormalAndBatch/Normal/balanced/permissions/metrics50.pkl", 'rb') as f:
     normal_balanced_permissions_50 = pickle.load(f)
 
