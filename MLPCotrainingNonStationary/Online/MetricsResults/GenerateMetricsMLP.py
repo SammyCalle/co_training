@@ -37,10 +37,7 @@ def generate_prediction_list(model_x1, model_x2, x1_test, x2_test):
     prediction_x1 = model_x1.predict(x1_test)
     prediction_x2 = model_x2.predict(x2_test)
 
-    prediction_x1_class = np.where(prediction_x1 >= 0.5, 1, 0)
-    prediction_x2_class = np.where(prediction_x2 >= 0.5, 1, 0)
-
-    for x1, x2 in zip(prediction_x1_class, prediction_x2_class):
+    for x1, x2 in zip(prediction_x1, prediction_x2):
         prediction_value = decide_prediction(prediction_x1=x1, prediction_x2=x2)
         prediction.append(prediction_value)
 
@@ -48,8 +45,12 @@ def generate_prediction_list(model_x1, model_x2, x1_test, x2_test):
 
 
 def decide_prediction(prediction_x1, prediction_x2):
-    if prediction_x1 == prediction_x2:
-        return prediction_x1[0]
+
+    prediction_x1_class = np.where(prediction_x1 >= 0.5, 1, 0)
+    prediction_x2_class = np.where(prediction_x2 >= 0.5, 1, 0)
+
+    if prediction_x1_class == prediction_x2_class:
+        return prediction_x1_class[0]
     else:
         sumPrediction = prediction_x1[0] + prediction_x2[0]
         pred_val = np.where(sumPrediction >= 1, 1, 0)

@@ -5,7 +5,7 @@ from RFCotrainingNonStationary.SplitPreProcess import SplitViews
 from sklearn.metrics import accuracy_score,f1_score,recall_score, precision_score
 import pickle
 
-with open("../Normal/not_balanced/both/model25.pkl", 'rb') as f:
+with open("../Batch/balanced/permissions/model25.pkl", 'rb') as f:
     models = pickle.load(f)
 
 with open("../../../../DataProcessing/YearData/FullData/fulldata_year.pkl", 'rb') as f:
@@ -19,7 +19,7 @@ def generate_all_the_predictions_lists(data_list, models) -> []:
 
     for key in models:
         generated_list = generate_prediction_list(models=models[key],
-                                                  x_test=both[key])
+                                                  x_test=permissions[key])
 
         prediction_list.append(generated_list)
 
@@ -74,5 +74,5 @@ latex_table = metrics_df.to_latex(
 )
 print(latex_table)
 
-with open("../Normal/not_balanced/both/metrics25.pkl", "wb") as file:
+with open("../Batch/balanced/permissions/metrics25.pkl", "wb") as file:
     pickle.dump(metrics_df, file)

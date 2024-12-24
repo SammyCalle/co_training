@@ -5,10 +5,10 @@ from RFCotrainingNonStationary.SplitPreProcess import SplitViews
 from sklearn.metrics import accuracy_score,f1_score,recall_score, precision_score
 import pickle
 
-with open("../YearExperimentResults/Normal/models_X1.pkl", 'rb') as f:
+with open("../YearExperimentResults/Normal/non_normal/optimized/OnlyModel/balanced/models_X1.pkl", 'rb') as f:
     models_X1 = pickle.load(f)
 
-with open("../YearExperimentResults/Normal/models_X2.pkl", 'rb') as f:
+with open("../YearExperimentResults/Normal/non_normal/optimized/OnlyModel/balanced/models_X2.pkl", 'rb') as f:
     models_X2 = pickle.load(f)
 
 with open("../../../DataProcessing/YearData/FullData/fulldata_year.pkl", 'rb') as f:

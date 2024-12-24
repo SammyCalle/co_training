@@ -3,13 +3,13 @@ import pickle
 import numpy as np
 import pandas as pd
 
-with open("../Online/YearExperimentResults/non_normal/optimized/OnlyModel/balanced/metrics.pkl", 'rb') as f:
+with open("../Online/YearExperimentResults/non_normal/optimized/OnlyModel/not_balanced/metrics.pkl", 'rb') as f:
     online_non_normal_non_optimized = pickle.load(f)
 
-with open("../NormalAndBatch/YearExperimentResults/Normal/non_normal/optimized/OnlyModel/balanced/metrics.pkl", 'rb') as f:
+with open("../NormalAndBatch/YearExperimentResults/Normal/non_normal/optimized/OnlyModel/not_balanced/metrics.pkl", 'rb') as f:
     normal_non_normal_non_optimized = pickle.load(f)
 
-with open("../NormalAndBatch/YearExperimentResults/Batch/non_normal/optimized/OnlyModel/balanced/metrics.pkl", 'rb') as f:
+with open("../NormalAndBatch/YearExperimentResults/Batch/non_normal/optimized/OnlyModel/not_balanced/metrics.pkl", 'rb') as f:
     batch_non_normal_non_optimized = pickle.load(f)
 
 
